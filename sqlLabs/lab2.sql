@@ -25,9 +25,10 @@ having count(*) > 5;
 
 -- 6 Найти и вывести на экран номера покупателей, CustomerID, у которых существует более одного чека,
 -- SalesORDERID, с одинаковой датой
-select CustomerID from Sales.SalesOrderHeader
-group by CustomerID
-having count(*) > 1;
+select distinct CustomerID, count(SalesOrderID) as cnt
+from Sales.SalesOrderHeader
+group by CustomerID, OrderDate
+having count(SalesOrderID) > 1;
 
 -- 7 Найти и вывести на экран все номера чеков, на которые приходится более трех продуктов.
 select SalesOrderID from Sales.SalesOrderDetail
